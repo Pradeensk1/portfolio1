@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier // Pradeen</title>
+    <!-- Link to the clean theme stylesheet -->
+    <link rel="stylesheet" href="clean-theme.css">
+    <!-- Import the clean font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- NEW: Styles specifically for PDF export to ensure readability -->
+    <style>
+        .pdf-export {
+            /* Override the glassmorphism for a clean, solid white background in the PDF */
+            background: #ffffff !important;
+            box-shadow: none !important;
+            border: 1px solid #e0e0e0 !important;
+        }
+        .pdf-export h1,
+        .pdf-export h2,
+        .pdf-export h3 {
+            color: #004a7c !important; /* A professional dark blue for headers */
+            text-shadow: none !important;
+        }
+        .pdf-export p,
+        .pdf-export li,
+        .pdf-export span,
+        .pdf-export strong {
+            color: #333333 !important; /* A standard dark gray for body text */
+        }
+        .pdf-export .skill-list li {
+            background: #f5f5f5 !important;
+            border-color: #e0e0e0 !important;
+        }
+        .pdf-export a {
+            color: #006ac1 !important;
+            text-decoration: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="clean-container">
+        
+        <!-- Action Buttons Container -->
+        <div class="action-buttons">
+            <a href="indes.html" class="btn-back">&lt; _RETURN_TO_TERMINAL</a>
+            <!-- Download Button -->
+            <button id="download-btn" class="btn-primary">&lt; DOWNLOAD_AS_PDF</button>
+        </div>
+
+        <!-- Resume Card - ID "resume-content" is used by the script -->
+        <section class="clean-glass-card" id="resume-content">
+            <h1>Pradeen // Secure Dossier</h1>
+            
+            <div class="resume-section">
+                <h2>&gt;_OPERATIONAL_SUMMARY</h2>
+                <p>An innovative and creative "vibe coder" with hands-on internship experience in UI/UX design. Specializing in the intersection of artificial intelligence and technology development, with a passion for leveraging AI to build groundbreaking projects. Proficient in Figma for creating intuitive user interfaces. A proactive problem-solver, actively seeking a role as a Developer or in the AI tech field to contribute to the next generation of software solutions.</p>
+            </div>
+
+            <div class="resume-section">
+                <h2>&gt;_EDUCATION_&_TRAINING</h2>
+                
+                <div class="job-title">
+                    <h3>Bachelor of Computer Applications (B.C.A)</h3>
+                    <span>June 2023 - May 2026 (Expected)</span>
+                </div>
+                <p>
+                    <strong>Institution:</strong> Sri Ramakrishna Mission Vidyalaya College of Arts and Science, Coimbatore<br>
+                    <strong>Affiliation:</strong> Bharathiyar University
+                </p>
+                <p>
+                    Coursework focuses on core computer science principles and hands-on programming. Actively participates in intercollegiate events and tech meetups to gather insights and inspiration for project development.
+                </p>
+            </div>
+
+            <div class="resume-section">
+                <h2>&gt;_FIELD_EXPERIENCE</h2>
+                
+                <div class="job-title">
+                    <h3>UI/UX Designer Intern</h3>
+                    <span>Aug 2025 - Nov 2025</span>
+                </div>
+                <p>
+                    <strong>Company:</strong> ZIDIO DEVELOPMENT
+                </p>
+                <ul style="list-style-type: square; padding-left: 20px;">
+                    <li>Gained hands-on experience in a professional environment, focusing on advanced UI/UX design principles for development.</li>
+                    <li>Translated complex requirements into intuitive and user-friendly interfaces, bridging the gap between design concepts and technical execution.</li>
+                    <li>Collaborated with the development team to ensure seamless implementation of Figma designs into functional applications.</li>
+                </ul>
+            </div>
+
+            <div class="resume-section">
+                <h2>&gt;_TECHNICAL_COMPETENCIES</h2>
+                <ul class="skill-list">
+                    <li>Java</li><li>Python</li><li>C#</li><li>C</li><li>UI/UX Design</li><li>Figma</li><li>AI Integration</li><li>Innovative Tech Projects</li><li>Full-Stack Development</li><li>Problem Solving</li>
+                </ul>
+            </div>
+
+            <div class="resume-section">
+                <h2>&gt;_COMMUNITY_&_ENGAGEMENT</h2>
+                 <div class="job-title">
+                    <h3>Community Participation</h3>
+                    <span>Ongoing</span>
+                </div>
+                <ul style="list-style-type: square; padding-left: 20px;">
+                    <li><strong>Java User Group (JUG) Meets:</strong> Actively participated in JAVA JUG TAMIL meetups to stay current with industry trends and network with fellow developers.</li>
+                    <li><strong>Intercollegiate Meets:</strong> Consistently attend technology and innovation events to brainstorm and validate new project ideas.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript Library for PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- UPDATED: Custom Script to handle PDF color changes -->
+    <script>
+        const downloadButton = document.getElementById('download-btn');
+        const resumeContent = document.getElementById('resume-content');
+
+        downloadButton.addEventListener('click', () => {
+            // 1. Temporarily add the 'pdf-export' class to apply dark text styles.
+            resumeContent.classList.add('pdf-export');
+
+            const options = {
+                margin:       10,
+                filename:     'Pradeen_Resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // 2. Use html2pdf to generate and save the PDF.
+            // The .then() function ensures that our cleanup code runs *after* the PDF is saved.
+            html2pdf().from(resumeContent).set(options).save().then(() => {
+                // 3. Remove the 'pdf-export' class to restore the original website styles.
+                resumeContent.classList.remove('pdf-export');
+            });
+        });
+    </script>
+</body>
+</html>
+
